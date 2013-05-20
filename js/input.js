@@ -1,8 +1,3 @@
-/*
-
-Input.js
-
-*/
 Extend(Editor.prototype, {
 
 	focusInput: function () {
