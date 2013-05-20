@@ -6,7 +6,13 @@ Extend(Editor.prototype, {
 		var template = 
 		'<section class="editor">' +
 			'<header>' +
-				'<div data-hull-widget="identity@hull" data-hull-provider="twitter"></div>' +
+				'<div data-hull-widget="identity@hull" data-hull-provider="twitter" class="hull-widget">' +
+    					'<div class="hull-identity__signin">' +
+      						'<button data-hull-action="login" data-hull-provider="twitter" class="btn btn-twitter">' +
+          						'Sign In with Twitter' +
+        					'</button>' +
+        				'</div>' +
+        			'</div>' +
 			'</header>' +
 			'<section class="view">' +
 				'<div class="wrapper">' +
