@@ -15,7 +15,6 @@ Extend(Editor.prototype, {
 			'</script>' +
 		'</header>'
 		'<section class="editor">' +
-			'<header><div data-hull-widget="login_button@hull"></div></header>' +
 			'<section class="view">' +
 				'<div class="wrapper">' +
 					'<section class="body">' +
