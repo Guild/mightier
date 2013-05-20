@@ -1,8 +1,3 @@
-/*
-
-Commands.js
-
-*/
 Extend(Editor.prototype, {
 
 	addLines: function (lines) {
