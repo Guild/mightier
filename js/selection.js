@@ -1,8 +1,3 @@
-/*
-
-Selection.js
-
-*/
 Extend(Editor.prototype, {
 
 	selectionStart: function () {
