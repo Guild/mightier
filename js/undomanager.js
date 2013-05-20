@@ -1,8 +1,3 @@
-/*
-
-Undomanager.js
-
-*/
 Extend(Editor.prototype, {
 
 	addHistory: function (action) {
