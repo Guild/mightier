@@ -13,13 +13,14 @@ var Editor = function (lines, options) {
 	this.line_height = 32;
 	this.em_width = 13;
 	this.width = 832; // max_line * em_width
-	this.padding = 156; // padding_length * em_width
+	this.padding_width = 156; // padding_length * em_width
 	this.tab_width = 64;
 
 	this.focused = null;
 	this.lastDoubleClick =  null;
 	this.lastClick = null;
 	this.focusmode = null;
+	this.blinker = null;
 	this.shiftSelecting = null;
 	this.textSelected = null;
 	this.textPasted = null;

@@ -4,16 +4,19 @@ Cursor.js
 
 */
 Extend(Editor.prototype, {
-	blinkCursor: function () {
-		var cursor = this.element.cursor.style;
-		cursor.webkitAnimationName = "none";
-		setTimeout(function () {
-			cursor.webkitAnimationName = "";
-		}, 10);
+	blinkCursor: function (toggle) {
+		clearInterval(this.blinker);
+		if (toggle===false) return;
+		var on = true, cursor = this.element.cursor.style;
+		cursor.visibility = "";
+		this.blinker = setInterval(function () {
+			cursor.visibility = (on = !on) ? "" : "hidden";
+		}, 650);
 	},
 
 	hideCursor: function () {
 		this.element.cursor.style.display = "none";
+		this.blinkCursor(false);
 	},
 	updateCursor: function (from, to) {
 		this.setCursor(to.x, to.y);

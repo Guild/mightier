@@ -23,8 +23,10 @@ body { overflow: auto; }
 /* Hide Selection */
 ::selection{ background: rgba(0,0,0,0); }
 /* Scrollbars */
-::-webkit-scrollbar { -webkit-appearance: none; width: 5px; }
-::-webkit-scrollbar-thumb { border-radius: 4px; background-color: rgba(0,0,0,.55); box-shadow: 0 0 1px rgba(255,255,255,.5); }
+::-webkit-scrollbar { width: 20px; height: 20px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb { border-radius: 999px; border: 8px solid transparent; }
+::-webkit-scrollbar-thumb { min-height: 20px; box-shadow: 0 0 0 8px rgba(0,0,0,.5) inset; }
+::-webkit-scrollbar-corner { background: transparent; }
 
 /* Editor */
 .editor,
@@ -40,7 +42,7 @@ body { overflow: auto; }
 	.view {
 		top: 32px;
 		bottom: 32px;
-		right: 10px;
+		right: 2px;
 		overflow-y: scroll;
 	}
 	
@@ -101,12 +103,6 @@ body { overflow: auto; }
 			top: -32px;
 			left: 0;
 			z-index: 15;
-			-webkit-animation: blink-cursor 1.2s step-end infinite;
-		}
-
-		@-webkit-keyframes blink-cursor {
-			from, to { background-color: #00BAFF; }
-			50% { background-color: transparent; }
 		}
 
 		/* Selection */
@@ -146,7 +142,7 @@ body { overflow: auto; }
 
 			/* Style */
 			strong { font-weight: bold; }
-			em, .focusmode .active em { border-bottom: 2px solid #424242; }
+			em, .focusmode .active em { font-family: "Courier New Italic"; }
 			del { text-decoration: none; }
 			del:before, .focusmode .active del:before {
 				display: block;
@@ -160,4 +156,4 @@ body { overflow: auto; }
 
 /* Focus Mode */
 .focusmode p { color: #CCC; }
-.focusmode em, .focusmode del:before { border-bottom: 2px solid #CCC; }
+.focusmode em, .focusmode del:before { font-family: "Courier New Italic"; }

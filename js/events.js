@@ -38,10 +38,6 @@ Extend(Editor.prototype, {
 	},
 	onMouseDown: function (e) {
 
-		if (e.target.localName == this.mark_container) {
-			return Event.preventDefault(e);
-		}
-
 		var self = this, view = this.element.view.getBoundingClientRect(), line = this.from.line;
 		var y = e.y >= view.bottom - 10 ? e.y - 10 : e.y;
 		var start = this.getPosition(e.x, y), last, going;
@@ -81,7 +77,6 @@ Extend(Editor.prototype, {
 
 		last = start;
 		start = this.shiftSelecting || start;
-		this.previousSelection = null;
 		this.updateSelection(start, last);
 
 		var mousemove = function (e) {
@@ -109,7 +104,7 @@ Extend(Editor.prototype, {
 				
 				end = last;
 				if (element.scrollHeight - element.offsetHeight !== element.scrollTop) {
-					element.scrollTop += self.line_height;
+					element.scrollTop += self.options.line_height;
 					end = self.getPosition(e.x, e.y - 10);
 					going = setTimeout(function (){ mousemove(e); } , 150);
 				}
@@ -223,7 +218,7 @@ var keyBindings = {
 		"up": "goLineUp",
 		"down": "goLineDown",
 		"end": "goLineEnd",
-		"home": "goDocStart",
+		"home": "goLineStartSmart",
 		"pageUp": "goPageUp",
 		"pageDown": "goPageDown",
 		"delete": "delCharRight",
@@ -232,6 +227,7 @@ var keyBindings = {
 		"shift+tab": "indentLess",
 		"enter": "newlineAndIndent", 
 		"insert": "toggleOverwrite",
+		"super+enter": "smartNewlineAndIndent",
 		/* Commands */
 		"super+d": "toggleFocusMode",
 		"super+a": "selectAll",
@@ -245,8 +241,6 @@ var keyBindings = {
 		"alt+right": "goWordRight",
 		"super+left": "goLineStart",
 		"super+right": "goLineEnd",
-		"alt+up": "goLineStart",
-		"alt+down": "goLineEnd",
 		"alt+backspace": "delWordLeft",
 		"ctrl+alt+backspace": "delWordRight",
 		"super+backspace": "deleteLine",
@@ -260,10 +254,10 @@ var keyBindings = {
 		"super+f": "toggleFullScreen",
 		"super+b": "makeStrong",
 		"super+i": "makeEmphasis",
-		"super+u": "makeDelete",
+		//"super+d": "makeDelete",
 		"super+l": "toggleToDo",
-		// "super+tab": "toggleDocument",
-		// "super+e": "toggleWidth",
+		"super+tab": "toggleDocument",
+		"super+e": "toggleWidth",
 		/* emacsy */
 		"Ctrl-F": "goCharRight",
 		"Ctrl-B": "goCharLeft",
@@ -296,10 +290,6 @@ var keyBindings = {
 	},
 
 	smartTypingPairs: {
-		'"' : '"',
-		"(" : ")",
-		"{" : "}",
-		"[" : "]",
 		"<" : ">",
 		"`" : "`"
 	}

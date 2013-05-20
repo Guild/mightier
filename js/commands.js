@@ -98,7 +98,7 @@ Extend(Editor.prototype, {
 
 	getPositionFromPoint: function (x, y) {
 		var element = this.element, wrapper = element.wrapper, view = element.view;
-		x += wrapper.getBoundingClientRect().left;
+		x += wrapper.getBoundingClientRect().left + this.padding_width / 2;
 		y += view.getBoundingClientRect().top + 8;
 		y -= view.scrollTop - parseInt(wrapper.style.paddingTop);
 		return this.getPosition(x, y);
@@ -256,7 +256,6 @@ Extend(Editor.prototype, {
 			position = dir < 0 ? from : to;
 		}
 		this.updateView(this.shiftSelecting ? this.from : position, position);
-		this.previousSelection = null;
 	},
 
 	moveVerticalPoint: function (dir, unit) {
@@ -274,7 +273,7 @@ Extend(Editor.prototype, {
 			var copyCursor = Range.copy(to);
 			copyCursor.y = to.y + distance * dir;
 			this.updateCursor(copyCursor, copyCursor);
-			position = this.getPositionFromPoint(to.x, copyCursor.y);
+			position = this.getPositionFromPoint(to.x, parseInt(this.element.cursor.style.top));
 		} else if (!Range.less(from, to)) {
 			position = dir < 0 ? to : from;
 		} else {
@@ -351,7 +350,7 @@ Extend(Editor.prototype, {
 	},
 	goLineStart: function () {
 		var start = this.selectionStart(), position;
-		position = this.getPositionFromPoint(-this.padding, start.y);
+		position = this.getPositionFromPoint(0, start.y);
 		this.updateView(this.shiftSelecting ? this.from : position, position);
 	},
 	goLineEnd: function () {
@@ -376,7 +375,7 @@ Extend(Editor.prototype, {
 		var position, line, size = this.getSize();
 		line = this.getLine(size); 
 		position = this.getPositionFromChar(size, line.textContent.length);
-		this.updateView(this.shiftSelecting ? this.from : position, position);
+		this.update(this.shiftSelecting ? this.from : position, position);
 	},
 	goWordLeft: function () {
 		this.moveHorizontalPoint(-1, "word");
@@ -539,11 +538,6 @@ Extend(Editor.prototype, {
 	},
 
 	smartTyping: function (from, to, open, close, select, noHistory) {
-		if (this.shiftSelecting && Range.equal(from, to)) {
-			var positions = this.findWord(to);
-			from = positions.from;
-			to = positions.to;
-		}
 		var _from = Range.copy(from), _to = Range.copy(to);
 		var value = this.getContent(from, to), textSelected = value.chunk[1];
 		value = value.chunk[0] + open + value.chunk[1] + close + value.chunk[2];
@@ -597,7 +591,8 @@ Extend(Editor.prototype, {
 	},
 
 	selectLine: function (position) {
-		var from = this.getPositionFromPoint(0, position.y), to =  this.getPositionFromPoint(this.width + this.padding, position.y);
+		console.log(this.width)
+		var from = this.getPositionFromPoint(0, position.y), to =  this.getPositionFromPoint(this.width, position.y);
 		this.updateView(from, to);
 	},
 
@@ -632,7 +627,7 @@ Extend(Editor.prototype, {
 				var line = this.getContent(from, from);
 				var value = line.textContent.splice(line.selectionStart, "" , undo.del);
 				this.replaceLines(from.line, from.line, value);
-				this.updateView(to, to);
+				this.updateView(from, to);
 			} else {
 				var from = undo.from, to = undo.to;
 				var line = this.getContent(from, to);
@@ -723,10 +718,8 @@ Extend(Editor.prototype, {
 		if (this.focusmode) {
 			this.focusmode = null;
 			this.onMouseWheel();
-			var offsetTop = parseInt(wrapper.style.paddingTop) - line_height;
 			wrapper.style.padding = line_height + "px 0";
-			view.scrollTop = this.selectionStart().y - offsetTop;
-
+			view.scrollTop = this.selectionStart().y;
 		} else {
 			this.focusmode = true;
 			this.editor.classList.add("focusmode");
