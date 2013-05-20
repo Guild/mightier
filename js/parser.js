@@ -1,8 +1,3 @@
-/*
-
-Parser.js
-
-*/
 Editor.prototype.parserLines = function (lines) {
 	if (typeof lines == "string") lines = lines.split(/\r?\n/);
 	lines = lines.slice();
