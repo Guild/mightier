@@ -1,8 +1,3 @@
-/* 
-
-Events.js
-
-*/
 Extend(Editor.prototype, {
 	addEvents: function () {
 		var el = this.element;
