@@ -1,8 +1,3 @@
-/*
-
-Cursor.js
-
-*/
 Extend(Editor.prototype, {
 	blinkCursor: function (toggle) {
 		clearInterval(this.blinker);
