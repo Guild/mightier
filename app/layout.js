@@ -6,9 +6,7 @@ Extend(Editor.prototype, {
 		var template = 
 		'<section class="editor">' +
 			'<header>' +
-				'<div data-hull-widget="identity@hull" data-hull-provider="twitter">' +
-					'<button data-hull-action="login">Login here</button>' +
-				'</div>' +
+				'<div data-hull-widget="identity@hull" data-hull-provider="twitter"></div>' +
 			'</header>' +
 			'<section class="view">' +
 				'<div class="wrapper">' +
