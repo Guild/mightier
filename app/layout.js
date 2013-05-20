@@ -6,14 +6,9 @@ Extend(Editor.prototype, {
 		var template = 
 		'<section class="editor">' +
 			'<header>' +
-				'<script type="text/x-template" data-hull-template="identity/identity">' +
-					'{{if loggedIn}}' +
-						'Hello {{name}}, how are you since the last time we met?' +
-					'{{else}}' +
-						'I don\'t know you, but I already like you!' +
-						'<button data-hull-action="login">Login here</button>' +
-					'{{/if}}' +
-				'</script>' +
+				'<div data-hull-widget="identity@hull" data-hull-provider="twitter">' +
+					'<button data-hull-action="login">Login here</button>' +
+				'</div>' +
 			'</header>' +
 			'<section class="view">' +
 				'<div class="wrapper">' +
