@@ -2,9 +2,4 @@
 *.sublime*
 .sass-cache
 node_modules
-
-# Ignore SymbolSet font files.
-symbolset/ss-standard.eot
-symbolset/ss-standard.svg
-symbolset/ss-standard.ttf
-symbolset/ss-standard.woff
+symbolset
