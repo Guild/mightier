@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="mightier.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script src="//hull-js.s3.amazonaws.com/develop/hull.js"></script>
+  <script src="https://hull-js.s3.amazonaws.com/develop/hull.js"></script>
 	<script>    Hull.init({
       appId : "5199809bf035ae4938000560",
       orgUrl: "http://guild.hullapp.io",
@@ -13,7 +13,6 @@
     });</script>
 </head>
 <body>
-  <div data-hull-widget="identity@hull"></div>
 	<script type="text/javascript" src="app/lib.js"></script>
 	<script type="text/javascript" src="app/editor.js"></script>
 	<script type="text/javascript" src="app/layout.js"></script>
@@ -31,6 +30,7 @@
 		Document.goDocStart();
 		Document.focusInput();
 	</script>
+  <div data-hull-widget="identity@hull"></div>
 	<script type="text/javascript">
   		var GoSquared = {};
   		GoSquared.acct = "GSN-434581-P";
