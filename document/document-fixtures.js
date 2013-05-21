@@ -1,4 +1,4 @@
-Mightier.fixtures = {
+Socrates.fixtures = {
 
     onboarding : [
 

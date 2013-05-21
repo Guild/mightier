@@ -6,7 +6,7 @@ marked.setOptions({
 });
 
 window.Socrates = {
-    firebaseUrl : 'https://mightier.firebaseIO.com/'
+    firebaseUrl : 'https://guild.firebaseIO.com/'
 };
 
 
@@ -19,4 +19,16 @@ $(function () {
         .render();
 
     Backbone.history.start();
+});
+
+
+// Analytics
+// ---------
+
+var dev = window.location.hostname === 'localhost';
+window.analytics.initialize({
+    'Segment.io'       : dev ? ''         : 'dthect0ayc',
+    'Google Analytics' : dev ? ''         : '',
+    'Mixpanel'         : dev ? ''         : '',
+    'KISSmetrics'      : dev ? ''         : ''
 });

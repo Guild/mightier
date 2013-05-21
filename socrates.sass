@@ -28,7 +28,7 @@
     flex: $flex
 
 @mixin mono()
-    font-family: "inconsolata", monospace
+    font-family: "inconsolata", mono
 
 @mixin serif()
     font-family: "kepler-std", serif
@@ -181,9 +181,6 @@ article
 
         border-bottom: 1px solid $rule
 
-    img
-        max-width: 100%
-
 textarea
     -webkit-appearance: none
     -moz-appearance: none
@@ -238,7 +235,7 @@ body
 // Write & Read
 // ------------
 
-.write-textarea-wrap,
+.document-textarea,
 .document-article
     padding: 3rem
     max-width: 32rem
@@ -280,17 +277,12 @@ body
     @media (min-width: 1200px)
         font-size: 14px
 
-.write-textarea-wrap
+.document-textarea
     position: absolute
     top: 0
     left: 0
     right: 0
     bottom: 0
-
-.document-textarea
-    position: relative
-    width: 100%
-    height: 100%
 
     &::-webkit-scrollbar
         width: 7px
@@ -442,38 +434,3 @@ pre
     .regexp,
     .function
         color: $blue
-
-
-// Print Styles
-// ------------
-
-// Contributed by https://github.com/SimpleAsCouldBe with slight modifications.
-@media print
-    .write,
-    .read-buttons
-        display: none
-
-    .read
-        border: none
-        box-shadow: none
-
-    .document-article
-        margin: 0 auto
-        max-width: 35em
-        padding: 0
-
-    @page
-        margin: 5em 0
-
-    *
-        background: white !important
-        color: black !important
-
-    a
-        text-decoration: none !important
-
-    a[href]::after
-        content: " (" attr(href) ")"
-
-    img
-        max-width: 100% !important
