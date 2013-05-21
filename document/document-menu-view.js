@@ -1,6 +1,6 @@
-/*global Socrates Backbone _ marked Rainbow */
+/*global Mightier Backbone _ marked Rainbow */
 
-Socrates.DocumentMenuView = Backbone.View.extend({
+Mightier.DocumentMenuView = Backbone.View.extend({
 
     tagName : 'ul',
 
