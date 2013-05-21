@@ -1,7 +1,3 @@
-var $ = function (element) {
-	return document.getElementById(element);	
-};
-
 var mac = /Mac/.test(navigator.platform);
 var win = /Win/.test(navigator.platform);
 
@@ -42,7 +38,7 @@ var Extend = function(destination, source) {
 
 var Range = {
 	copy: function (position) {
-		return { 
+		return {
 			line: position.line,
 			ch: position.ch,
 			x: position.x,
