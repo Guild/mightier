@@ -1,9 +1,9 @@
-/*global Backbone Socrates _ */
+/*global Backbone Mightier _ */
 
 var ID_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 var ID_LENGTH     = 7;
 
-Socrates.Model = Backbone.Model.extend({
+Mightier.Model = Backbone.Model.extend({
 
     defaults : {
         document  : null,
@@ -11,7 +11,7 @@ Socrates.Model = Backbone.Model.extend({
         state     : null
     },
 
-    bookmarkKey : 'socrates.bookmarks',
+    bookmarkKey : 'mightier.bookmarks',
 
     initialize : function (attributes, options) {
         _.bindAll(this);
@@ -35,7 +35,7 @@ Socrates.Model = Backbone.Model.extend({
     },
 
     initializeDocuments : function () {
-        var documents = new Socrates.DocumentCollection()
+        var documents = new Mightier.DocumentCollection()
             .on('add remove', this.writeBookmarks)
             .on('remove', this.onDocumentRemove);
 
@@ -51,7 +51,7 @@ Socrates.Model = Backbone.Model.extend({
     fetchDocument : function (id, body) {
         if (!_.isString(body)) body = '';
 
-        var document = new Socrates.DocumentModel({
+        var document = new Mightier.DocumentModel({
             id   : id,
             body : body
         });
@@ -161,11 +161,11 @@ Socrates.Model = Backbone.Model.extend({
 var onboarding = [
 
     '# What the _heck_ is this?',
-    'Socrates lets you write Markdown with whoever you want. Write words on the left, read _real_ similar words on the right, and send out the link!',
+    'Mightier lets you write Markdown with whoever you want. Write words on the left, read _real_ similar words on the right, and send out the link!',
     '',
     'It\'s a weekend project by [@ivolo][1] and [@ianstormtaylor][2]. We we\'re always sending around Stypis and Etherpads while working on [Segment.io][3], but we really wanted to just write and read in Markdown instead. So that\'s what we built. Thanks to [Firebase][4], it was incredibly easy and it\'s all realtime! You can see all the code [on Github][5].',
     '',
-    'Socrates updates for everyone in real time, but is best when edited by a single person at a time.',
+    'Mightier updates for everyone in real time, but is best when edited by a single person at a time.',
     '',
     'More importantly though, erase this junk and start writing your own stuff...',
     '',
@@ -173,7 +173,7 @@ var onboarding = [
     '[2]: https://twitter.com/ianstormtaylor',
     '[3]: https://segment.io',
     '[4]: https://firebase.com',
-    '[5]: https://github.com/segmentio/socrates',
+    '[5]: https://github.com/segmentio/mightier',
     '',
     '---',
     '',
