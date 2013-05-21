@@ -1,9 +1,9 @@
-/*global Backbone Socrates _ */
+/*global Backbone mightier _ */
 
 var ID_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 var ID_LENGTH     = 7;
 
-Socrates.Model = Backbone.Model.extend({
+mightier.Model = Backbone.Model.extend({
 
     defaults : {
         document  : null,
@@ -11,7 +11,7 @@ Socrates.Model = Backbone.Model.extend({
         state     : null
     },
 
-    bookmarkKey : 'socrates.bookmarks',
+    bookmarkKey : 'mightier.bookmarks',
 
     initialize : function (attributes, options) {
         _.bindAll(this);
@@ -35,7 +35,7 @@ Socrates.Model = Backbone.Model.extend({
     },
 
     initializeDocuments : function () {
-        var documents = new Socrates.DocumentCollection()
+        var documents = new mightier.DocumentCollection()
             .on('add remove', this.writeBookmarks)
             .on('remove', this.onDocumentRemove);
 
@@ -51,7 +51,7 @@ Socrates.Model = Backbone.Model.extend({
     fetchDocument : function (id, body) {
         if (!_.isString(body)) body = '';
 
-        var document = new Socrates.DocumentModel({
+        var document = new mightier.DocumentModel({
             id   : id,
             body : body
         });
@@ -91,7 +91,7 @@ Socrates.Model = Backbone.Model.extend({
     onHomeRoute : function () {
         var body = ''; // blank slate for an experienced user
         if (!localStorage.getItem(this.bookmarkKey))
-            body = onboarding; // onboarding text for a new user 
+            body = onboarding; // onboarding text for a new user
 
         this.set('document', this.createDocument(body));
 
@@ -158,11 +158,11 @@ Socrates.Model = Backbone.Model.extend({
 
 var onboarding = [
     '# What the _heck_ is this?',
-    'Socrates lets you write Markdown with whoever you want. Write words on the left, read _real_ similar words on the right, and send out the link!',
+    'mightier lets you write Markdown with whoever you want. Write words on the left, read _real_ similar words on the right, and send out the link!',
     '',
     'It\'s a weekend project by [@ivolo][1] and [@ianstormtaylor][2]. We we\'re always sending around Stypis and Etherpads while working on [Segment.io][3], but we really wanted to just write and read in Markdown instead. So that\'s what we built. Thanks to [Firebase][4], it was incredibly easy and it\'s all realtime! You can see all the code [on Github][5].',
     '',
-    'Socrates updates for everyone in real time, but is best when edited by a single person at a time.',
+    'mightier updates for everyone in real time, but is best when edited by a single person at a time.',
     '',
     'More importantly though, erase this junk and start writing your own stuff...',
     '',
@@ -170,7 +170,7 @@ var onboarding = [
     '[2]: https://twitter.com/ianstormtaylor',
     '[3]: https://segment.io',
     '[4]: https://firebase.com',
-    '[5]: https://github.com/segmentio/socrates',
+    '[5]: https://github.com/segmentio/mightier',
     '',
     '---',
     '',
@@ -194,8 +194,8 @@ var random = [
 ];
 
 onboarding = [
-    '# Socrates now supports LaTeX Math!\n',
-    'If you haven\'t used it before, Socrates is a real-time [markdown](http://daringfireball.net/projects/markdown/) editor in your browser. And **today we added support for beautiful math**, using [MathJax](http://mathjax.com/)!\n',
+    '# mightier now supports LaTeX Math!\n',
+    'If you haven\'t used it before, mightier is a real-time [markdown](http://daringfireball.net/projects/markdown/) editor in your browser. And **today we added support for beautiful math**, using [MathJax](http://mathjax.com/)!\n',
 
     'Let\'s derive the quadratic formula. Starting with:',
     '$$ ax^2 + bx + c = 0 $$\n',

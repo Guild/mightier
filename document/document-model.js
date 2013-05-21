@@ -1,4 +1,4 @@
-/*global Socrates Backbone Firebase _ marked */
+/*global mightier Backbone Firebase _ marked */
 
 var days = [
     'Sunday',
@@ -35,7 +35,7 @@ var nths = {
     31 : 'st'
 };
 
-Socrates.DocumentModel = Backbone.Model.extend({
+mightier.DocumentModel = Backbone.Model.extend({
 
     defaults : function () {
         return {
@@ -45,7 +45,7 @@ Socrates.DocumentModel = Backbone.Model.extend({
         };
     },
 
-    urlRoot : Socrates.firebaseUrl + 'documents/',
+    urlRoot : mightier.firebaseUrl + 'documents/',
 
     initialize : function (attributes, options) {
         _.bindAll(this);

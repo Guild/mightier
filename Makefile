@@ -2,6 +2,6 @@ server:
 	node server.js
 
 css:
-	sass --watch socrates.sass:socrates.css
+	sass --watch mightier.sass:mightier.css
 
 .PHONY: css

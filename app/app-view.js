@@ -1,4 +1,4 @@
-/*global Socrates Backbone marked _ Rainbow */
+/*global mightier Backbone marked _ Rainbow */
 
 var $window = $(window);
 var MININUM_WIDTH = 1000;
@@ -20,7 +20,7 @@ if (typeof document.hidden !== "undefined") {
     visibilityChange = "webkitvisibilitychange";
 }
 
-Socrates.View = Backbone.View.extend({
+mightier.View = Backbone.View.extend({
 
     youtubeEmbedTemplate : _.template('<iframe width="100%" height="400" src="http://www.youtube.com/embed/<%= id %>" frameborder="0" allowfullscreen></iframe>'),
 
@@ -48,7 +48,7 @@ Socrates.View = Backbone.View.extend({
         this.$textarea.tabby({tabString:'    '});
 
         // Make a menu to select documents from.
-        this.documentMenu = new Socrates.DocumentMenuView({
+        this.documentMenu = new mightier.DocumentMenuView({
             collection : this.model.get('documents'),
             el         : this.$menu
         })
@@ -223,14 +223,14 @@ Socrates.View = Backbone.View.extend({
 
     stopTitleCursor : function () {
         clearInterval(this._cursorInterval);
-        this.$title.html('Socrates');
+        this.$title.html('mightier');
     },
 
     renderTitleCursor : function () {
         this._titleCursor || (this._titleCursor = 'on');
 
         var cursor = this._titleCursor === 'on' ? '|' : '';
-        this.$title.html('Socrates' + cursor);
+        this.$title.html('mightier' + cursor);
 
         // Swap the cursor for next time.
         this._titleCursor = this._titleCursor === 'on' ? 'off' : 'on';
