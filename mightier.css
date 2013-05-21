@@ -34,7 +34,7 @@ body { overflow: auto; }
 	background-color: rgb(242,242,242);
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 60px;
 	bottom: 0;
 	right: 0;
 	overflow: auto;
