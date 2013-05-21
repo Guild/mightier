@@ -1,9 +1,9 @@
-/*global Backbone Mightier _ */
+/*global Backbone Socrates _ */
 
 var ID_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 var ID_LENGTH     = 7;
 
-Mightier.Model = Backbone.Model.extend({
+Socrates.Model = Backbone.Model.extend({
 
     defaults : {
         document  : null,
@@ -11,7 +11,7 @@ Mightier.Model = Backbone.Model.extend({
         state     : null
     },
 
-    bookmarkKey : 'mightier.bookmarks',
+    bookmarkKey : 'socrates.bookmarks',
 
     initialize : function (attributes, options) {
         _.bindAll(this);
@@ -35,7 +35,7 @@ Mightier.Model = Backbone.Model.extend({
     },
 
     initializeDocuments : function () {
-        var documents = new Mightier.DocumentCollection()
+        var documents = new Socrates.DocumentCollection()
             .on('add remove', this.writeBookmarks)
             .on('remove', this.onDocumentRemove);
 
@@ -51,7 +51,7 @@ Mightier.Model = Backbone.Model.extend({
     fetchDocument : function (id, body) {
         if (!_.isString(body)) body = '';
 
-        var document = new Mightier.DocumentModel({
+        var document = new Socrates.DocumentModel({
             id   : id,
             body : body
         });
@@ -89,11 +89,9 @@ Mightier.Model = Backbone.Model.extend({
     // --------------
 
     onHomeRoute : function () {
-        var body = onboarding;
-        if (localStorage.getItem(this.bookmarkKey)) {
-            var index = _.random(0, random.length-1);
-            body = random[index];
-        }
+        var body = ''; // blank slate for an experienced user
+        if (!localStorage.getItem(this.bookmarkKey))
+            body = onboarding; // onboarding text for a new user 
 
         this.set('document', this.createDocument(body));
 
@@ -127,7 +125,7 @@ Mightier.Model = Backbone.Model.extend({
         var fragment = document.id;
         if (state) fragment += '/'+state;
 
-        this.router.navigate(fragment);
+        this.router.navigate(fragment, {replace:true});
     },
 
     onDocumentRemove : function (removedDocument) {
@@ -159,13 +157,12 @@ Mightier.Model = Backbone.Model.extend({
 });
 
 var onboarding = [
-
     '# What the _heck_ is this?',
-    'Mightier lets you write Markdown with whoever you want. Write words on the left, read _real_ similar words on the right, and send out the link!',
+    'Socrates lets you write Markdown with whoever you want. Write words on the left, read _real_ similar words on the right, and send out the link!',
     '',
     'It\'s a weekend project by [@ivolo][1] and [@ianstormtaylor][2]. We we\'re always sending around Stypis and Etherpads while working on [Segment.io][3], but we really wanted to just write and read in Markdown instead. So that\'s what we built. Thanks to [Firebase][4], it was incredibly easy and it\'s all realtime! You can see all the code [on Github][5].',
     '',
-    'Mightier updates for everyone in real time, but is best when edited by a single person at a time.',
+    'Socrates updates for everyone in real time, but is best when edited by a single person at a time.',
     '',
     'More importantly though, erase this junk and start writing your own stuff...',
     '',
@@ -173,7 +170,7 @@ var onboarding = [
     '[2]: https://twitter.com/ianstormtaylor',
     '[3]: https://segment.io',
     '[4]: https://firebase.com',
-    '[5]: https://github.com/segmentio/mightier',
+    '[5]: https://github.com/segmentio/socrates',
     '',
     '---',
     '',
@@ -193,6 +190,33 @@ var random = [
         '> For lack of exercise, it\'s surely the cause.\n',
         '– by **Beverly Dingus**, a poem.\n\n',
         '[On Health](http://www.youtube.com/watch?v=sYMYktsKmSk)'
-
     ].join('\n')
 ];
+
+onboarding = [
+    '# Socrates now supports LaTeX Math!\n',
+    'If you haven\'t used it before, Socrates is a real-time [markdown](http://daringfireball.net/projects/markdown/) editor in your browser. And **today we added support for beautiful math**, using [MathJax](http://mathjax.com/)!\n',
+
+    'Let\'s derive the quadratic formula. Starting with:',
+    '$$ ax^2 + bx + c = 0 $$\n',
+
+    'We\'ll move around the constant terms and coefficients:',
+    '$$ ax^2 + bx = -c $$',
+    '$$ x^2 + \\frac{b}{a} x = -\\frac{c}{a} $$\n',
+
+    'Then we add a new mystery constant so that things will simplify later:',
+    '$$ x^2 + \\frac{b}{a} x + \\frac{b^2}{4a^2} = -\\frac{c}{a}  + \\frac{b^2}{4a^2} $$\n',
+
+    'Then it\'s a simple matter of boiling this down to the final solution:',
+    '$$ x^2 + \\frac{b}{a} x + \\frac{b^2}{4a^2} = \\frac{b^2 - 4ac}{4a^2} $$',
+    '$$ \\left( x + \\frac{b}{2a} \\right)^2 = \\frac{b^2 - 4ac}{4a^2} $$',
+    '$$ x + \\frac{b}{2a} = \\pm \\sqrt{ \\frac{b^2 - 4ac}{4a^2} } $$',
+    '$$ x = - \\frac{b \\pm \\sqrt{ b^2 - 4ac } }{2a} $$\n',
+
+    '$$ \\Box $$\n',
+
+    'Keeping all of the LaTeX math syntax in your head is no easy feat, but you\'ll find the [Art of Problem Solving Wiki](http://www.artofproblemsolving.com/Wiki/index.php/LaTeX:Symbols) is an invaluable reference.\n',
+
+    'Happy mathing!'
+].join('\n');
+random = [onboarding];

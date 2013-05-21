@@ -1,9 +1,26 @@
-/*global Mightier Backbone marked _ Rainbow */
+/*global Socrates Backbone marked _ Rainbow */
 
 var $window = $(window);
 var MININUM_WIDTH = 1000;
 
-Mightier.View = Backbone.View.extend({
+// Pave over the page visibility API in different browsers.
+// https://developer.mozilla.org/en-US/docs/DOM/Using_the_Page_Visibility_API
+var hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+} else if (typeof document.mozHidden !== "undefined") {
+    hidden = "mozHidden";
+    visibilityChange = "mozvisibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+}
+
+Socrates.View = Backbone.View.extend({
 
     youtubeEmbedTemplate : _.template('<iframe width="100%" height="400" src="http://www.youtube.com/embed/<%= id %>" frameborder="0" allowfullscreen></iframe>'),
 
@@ -31,7 +48,7 @@ Mightier.View = Backbone.View.extend({
         this.$textarea.tabby({tabString:'    '});
 
         // Make a menu to select documents from.
-        this.documentMenu = new Mightier.DocumentMenuView({
+        this.documentMenu = new Socrates.DocumentMenuView({
             collection : this.model.get('documents'),
             el         : this.$menu
         })
@@ -51,6 +68,13 @@ Mightier.View = Backbone.View.extend({
 
         // Add a window resize handler to re-try state.
         $window.on('resize', this.onWindowResize);
+
+        // Only show the title cursor when the page is visible.
+        var self = this;
+        document.addEventListener(visibilityChange, function () {
+            document[hidden] ? self.stopTitleCursor() : self.startTitleCursor();
+        }, false);
+        this.startTitleCursor();
     },
 
     applyDocumentEventHandlers : function (document, unbind) {
@@ -63,26 +87,10 @@ Mightier.View = Backbone.View.extend({
     // -------
 
     render : function () {
-        this.renderTitle()
-            .renderMenu()
+        this.renderMenu()
             .renderTextarea()
             .renderArticle()
             .renderState();
-
-        // Keep rendering the title cursor.
-        setInterval(this.renderTitle, 500);
-    },
-
-    renderTitle : function () {
-        this._titleCursor || (this._titleCursor = 'on');
-
-        var cursor = this._titleCursor === 'on' ? '|' : '';
-        this.$title.html('Mightier' + cursor);
-
-        // Swap the cursor for next time.
-        this._titleCursor = this._titleCursor === 'on' ? 'off' : 'on';
-
-        return this;
     },
 
     renderMenu : function () {
@@ -109,6 +117,7 @@ Mightier.View = Backbone.View.extend({
         // Apply extra filters.
         this.renderYoutubeFilter();
         this.renderCodeHighlightingFilter();
+        this.renderMathJax();
     },
 
     renderState : function () {
@@ -158,6 +167,11 @@ Mightier.View = Backbone.View.extend({
         });
     },
 
+    // Tell mathjax to do it's thing
+    renderMathJax : _.debounce(function () {
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }, 150),
+
     // Apply code highlighting. We have to convert the highlighting classes
     // that marked.js gives us into ones that Rainbow.js can read first.
     renderCodeHighlightingFilter : function () {
@@ -201,6 +215,27 @@ Mightier.View = Backbone.View.extend({
     toggleMenu : function () {
         this.$menu.slideToggle();
         this.$menuButton.toggleState('pressed');
+    },
+
+    startTitleCursor : function () {
+        this._cursorInterval = setInterval(this.renderTitleCursor, 500);
+    },
+
+    stopTitleCursor : function () {
+        clearInterval(this._cursorInterval);
+        this.$title.html('Socrates');
+    },
+
+    renderTitleCursor : function () {
+        this._titleCursor || (this._titleCursor = 'on');
+
+        var cursor = this._titleCursor === 'on' ? '|' : '';
+        this.$title.html('Socrates' + cursor);
+
+        // Swap the cursor for next time.
+        this._titleCursor = this._titleCursor === 'on' ? 'off' : 'on';
+
+        return this;
     },
 
 
