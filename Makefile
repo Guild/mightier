@@ -1,7 +1,4 @@
-server:
-	node server.js
-
 css:
-	sass --watch mightier.sass:mightier.css
+	sass --watch socrates.sass:socrates.css
 
 .PHONY: css
