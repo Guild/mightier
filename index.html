@@ -13,6 +13,15 @@
     });</script>
 </head>
 <body>
+  <header>
+    <div data-hull-widget="identity@hull" data-hull-provider="twitter" class="hull-widget">
+      <div class="hull-identity__signin">
+          <button data-hull-action="login" data-hull-provider="twitter" class="btn btn-twitter">
+            Sign In with Twitter
+          </button>
+      </div>
+    </div>
+  </header>
 	<script type="text/javascript" src="app/lib.js"></script>
 	<script type="text/javascript" src="app/editor.js"></script>
 	<script type="text/javascript" src="app/layout.js"></script>
@@ -23,6 +32,7 @@
 	<script type="text/javascript" src="app/selection.js"></script>
 	<script type="text/javascript" src="app/parser.js"></script>
 	<script type="text/javascript" src="app/undomanager.js"></script>
+
 	<script type="text/javascript">
 		var text = ["# SHORTCUTS", "", "FocusMode: Cmd + D", "SmartTyping: Type \"<\", \"\"\", \"[\", \"{\" & \"(\"", "Save: Cmd + S", "Indent: Tab or Shift + Tab", "", "## Emphasis and Strong", "", "Emphasis: *example* = _example_ (or Cmd + I)", "Strong: **example** = __example__ (or Cmd + B)", "", "## Numbered lists: type \"1.\" + space", "", "1. Ordered list item", "2. Ordered list item", "3. Ordered list item (enter to create a new item)", "", "## Bulleted lists: type \"*\" + space", "", "* Bulleted list item", "* Bulleted list item", "* Bulleted list item", "", "## ToDo lists: type \"-\" or \"+\" + space", "", "- Task (Mark as done, click on \"-\")", "+ Task Done", "", "## Indentation", "", "	This is an example of a indented paragraph.", "", "## Blockquotes", "", "> This is an example of a quoted paragraph. It stays indented over multiple lines until you hit enter.", "","@icebeat"]
 		var Document = new Editor(localStorage["content"] || text);
