@@ -1,9 +1,9 @@
-/*global mightier Backbone marked _ Rainbow */
+/*global Mightier Backbone marked _ Rainbow */
 
 var $window = $(window);
 var MININUM_WIDTH = 1000;
 
-mightier.View = Backbone.View.extend({
+Mightier.View = Backbone.View.extend({
 
     youtubeEmbedTemplate : _.template('<iframe width="100%" height="400" src="http://www.youtube.com/embed/<%= id %>" frameborder="0" allowfullscreen></iframe>'),
 
@@ -31,7 +31,7 @@ mightier.View = Backbone.View.extend({
         this.$textarea.tabby({tabString:'    '});
 
         // Make a menu to select documents from.
-        this.documentMenu = new mightier.DocumentMenuView({
+        this.documentMenu = new Mightier.DocumentMenuView({
             collection : this.model.get('documents'),
             el         : this.$menu
         })
@@ -77,7 +77,7 @@ mightier.View = Backbone.View.extend({
         this._titleCursor || (this._titleCursor = 'on');
 
         var cursor = this._titleCursor === 'on' ? '|' : '';
-        this.$title.html('mightier' + cursor);
+        this.$title.html('Mightier' + cursor);
 
         // Swap the cursor for next time.
         this._titleCursor = this._titleCursor === 'on' ? 'off' : 'on';

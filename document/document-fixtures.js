@@ -1,4 +1,4 @@
-mightier.fixtures = {
+Mightier.fixtures = {
 
     onboarding : [
 

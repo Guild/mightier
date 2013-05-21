@@ -1,7 +1,7 @@
-/*global Mightier Backbone */
+/*global Socrates Backbone */
 
-Mightier.DocumentCollection = Backbone.Collection.extend({
+Socrates.DocumentCollection = Backbone.Collection.extend({
 
-    model : Mightier.DocumentModel
+    model : Socrates.DocumentModel
 
 });
