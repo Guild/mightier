@@ -1,54 +1,60 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Socrates</title>
-        <meta name="description" content="Write and read beautiful Markdown with whoever you want, in realtime!">
-        <meta name="viewport" content ="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <link rel="shortcut icon" href="favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="socrates.css">
-        <script src="https://static.firebase.com/v0/firebase.js"></script>
-        <script src="http://use.typekit.net/gmy5jor.js"></script>
-        <script>try{Typekit.load();}catch(e){}</script>
-    </head>
+<head>
+	<title>Greetings | Mightier</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="mightier.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="//hull-js.s3.amazonaws.com/develop/hull.js"></script>
+	<script>    Hull.init({
+      appId : "5199809bf035ae4938000560",
+      orgUrl: "http://guild.hullapp.io",
+      debug : true // optional
+    });</script>
+</head>
+<body>
+  <div data-hull-widget="identity@hull">
+    <button data-hull-action="login" data-hull-provider="twitter" class="btn btn-twitter">
+      Sign In with Twitter
+    </button>
+  </div>
+	<script type="text/javascript" src="app/lib.js"></script>
+	<script type="text/javascript" src="app/editor.js"></script>
+	<script type="text/javascript" src="app/layout.js"></script>
+	<script type="text/javascript" src="app/events.js"></script>
+	<script type="text/javascript" src="app/commands.js"></script>
+	<script type="text/javascript" src="app/cursor.js"></script>
+	<script type="text/javascript" src="app/input.js"></script>
+	<script type="text/javascript" src="app/selection.js"></script>
+	<script type="text/javascript" src="app/parser.js"></script>
+	<script type="text/javascript" src="app/undomanager.js"></script>
 
-    <body>
-        <section class="write">
-            <ul class="document-menu"></ul>
-            <form class="write-form">
-                <div class="write-buttons">
-                    <button class="menu-button ss-rows"></button>
-                    <button class="add-button ss-plus"></button>
-                    <button class="write-only-button ss-write"></button>
-                </div>
-                <textarea class="document-textarea"></textarea>
-            </form>
-            <aside class="attribution">Brought to you by <a class="segmentio-link" href="https://segment.io">Segment.io</a>&ensp;&mdash;&ensp;Powered by <a class="firebase-link" href="https://firebase.com">Firebase</a></aside>
-        </section>
-
-        <section class="read">
-            <div class="read-buttons">
-                <button class="read-only-button ss-view"></button>
-            </div>
-            <article class="document-article"></article>
-        </section>
-
-        <script type="text/template" id="document-menu-item-template">
-            <li data-id="<%= document.id %>" class="document-menu-item">
-                <div class="document-menu-item-wrap">
-                    <span class="document-menu-item-title"><%= document.get('title') %></span>
-                    <button class="document-menu-item-delete-button ss-trash"></button>
-                </div>
-            </li>
-        </script>
-
-        <script src="libs.js"></script>
-        <script src="socrates.js"></script>
-        <script src="app/app-view.js"></script>
-        <script src="app/app-model.js"></script>
-        <script src="document/document-fixtures.js"></script>
-        <script src="document/document-model.js"></script>
-        <script src="document/document-collection.js"></script>
-        <script src="document/document-menu-view.js"></script>
-    </body>
+	<script type="text/javascript">
+		var text = ["# SHORTCUTS", "", "FocusMode: Cmd + D", "SmartTyping: Type \"<\", \"\"\", \"[\", \"{\" & \"(\"", "Save: Cmd + S", "Indent: Tab or Shift + Tab", "", "## Emphasis and Strong", "", "Emphasis: *example* = _example_ (or Cmd + I)", "Strong: **example** = __example__ (or Cmd + B)", "", "## Numbered lists: type \"1.\" + space", "", "1. Ordered list item", "2. Ordered list item", "3. Ordered list item (enter to create a new item)", "", "## Bulleted lists: type \"*\" + space", "", "* Bulleted list item", "* Bulleted list item", "* Bulleted list item", "", "## ToDo lists: type \"-\" or \"+\" + space", "", "- Task (Mark as done, click on \"-\")", "+ Task Done", "", "## Indentation", "", "	This is an example of a indented paragraph.", "", "## Blockquotes", "", "> This is an example of a quoted paragraph. It stays indented over multiple lines until you hit enter.", "","@icebeat"]
+		var Document = new Editor(localStorage["content"] || text);
+		Document.goDocStart();
+		Document.focusInput();
+	</script>
+	<script type="text/javascript">
+  		var GoSquared = {};
+  		GoSquared.acct = "GSN-434581-P";
+  		(function(w){
+    			function gs(){
+      				w._gstc_lt = +new Date;
+      				var d = document, g = d.createElement("script");
+      				g.type = "text/javascript";
+      				g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+      				var s = d.getElementsByTagName("script")[0];
+      				s.parentNode.insertBefore(g, s);
+    			}
+    			w.addEventListener ?
+      				w.addEventListener("load", gs, false) :
+      				w.attachEvent("onload", gs);
+  		})(window);
+	</script>
+	<script type="text/javascript">
+  		var analytics=analytics||[];analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["identify","track","trackLink","trackForm","trackClick","trackSubmit","pageview","ab","alias","ready","group"];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
+  		analytics.load("dthect0ayc");
+	</script>
+</body>
 </html>
