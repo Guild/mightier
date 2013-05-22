@@ -6,7 +6,7 @@ Extend(Editor.prototype, {
 		cursor.visibility = "";
 		this.blinker = setInterval(function () {
 			cursor.visibility = (on = !on) ? "" : "hidden";
-		}, 650);
+		}, 626);
 	},
 
 	hideCursor: function () {
