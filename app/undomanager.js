@@ -1,78 +1,57 @@
 Extend(Editor.prototype, {
-
-	addHistory: function (action) {
-		this.undomanager.add(action);
-	},
-
-	getUndo: function () {
-		return this.undomanager.undo();
-	},
-
-	getRedo: function () {
-		return this.undomanager.redo();
-	}
-
+    addHistory: function (e) {
+        this.undomanager.add(e)
+    },
+    getUndo: function () {
+        return this.undomanager.undo()
+    },
+    getRedo: function () {
+        return this.undomanager.redo()
+    }
 });
-
 var UndoManager = function () {
-	this.undoStack = [];
-	this.redoStack = [];
+    this.undoStack = [];
+    this.redoStack = []
 };
-
 UndoManager.prototype = {
-
-	add: function (action) {
-		
-		var lastAction = this.undoStack.pop() || null;
-
-		if(lastAction) {
-			var push = 
-					lastAction.action || action.action
-					|| lastAction.textSelected || action.textSelected
-					|| (action.del && lastAction.add) 
-					|| (action.add && !lastAction.add)
-					|| (action.add && !Range.equal(lastAction.to, action.from))
-					|| (action.del && !Range.equal(lastAction.from, action.to));
-			
-			if (push) {
-			  	this.undoStack.push(lastAction);
-			  	this.undoStack.push(action);
-			} else if(lastAction) {
-				var combined = this.chain(lastAction, action);
-				this.undoStack.push(combined);
-			}
-		} else {
-			this.undoStack.push(action);
-		}
-		
-		this.redoStack = [];
-	},
-
-	undo: function () {
-		var action = this.undoStack.pop() || null;
-		if (action) {
-			this.redoStack.push(action);
-		}
-		return action;
-	},
-
-	redo: function () {
-		var action = this.redoStack.pop() || null;
-		if (action) {
-			this.undoStack.push(action);
-		}
-		return action;
-	},
-
-	chain: function (action1, action2) {
-		var action = {
-			add: action1.add + action2.add,
-			del: action2.del + action1.del,
-			textPasted: null
-		};
-		action.from = action.add ? action1.from : action2.from;
-		action.to = action.add ? action2.to : action1.to;
-		return action;
-	}
-
-};
+    add: function (e) {
+        var t = this.undoStack.pop() || null;
+        if (t) {
+            var n = t.action || e.action || t.textSelected || e.textSelected || e.del && t.add || e.add && !t.add || e.add && !Range.equal(t.to, e.from) || e.del && !Range.equal(t.from, e.to);
+            if (n) {
+                this.undoStack.push(t);
+                this.undoStack.push(e)
+            } else if (t) {
+                var r = this.chain(t, e);
+                this.undoStack.push(r)
+            }
+        } else {
+            this.undoStack.push(e)
+        }
+        this.redoStack = []
+    },
+    undo: function () {
+        var e = this.undoStack.pop() || null;
+        if (e) {
+            this.redoStack.push(e)
+        }
+        return e
+    },
+    redo: function () {
+        var e = this.redoStack.pop() || null;
+        if (e) {
+            this.undoStack.push(e)
+        }
+        return e
+    },
+    chain: function (e, t) {
+        var n = {
+            add: e.add + t.add,
+            del: t.del + e.del,
+            textPasted: null
+        };
+        n.from = n.add ? e.from : t.from;
+        n.to = n.add ? t.to : e.to;
+        return n
+    }
+}

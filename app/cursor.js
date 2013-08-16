@@ -1,33 +1,34 @@
 Extend(Editor.prototype, {
-	blinkCursor: function (toggle) {
-		clearInterval(this.blinker);
-		if (toggle===false) return;
-		var on = true, cursor = this.element.cursor.style;
-		cursor.visibility = "";
-		this.blinker = setInterval(function () {
-			cursor.visibility = (on = !on) ? "" : "hidden";
-		}, 626);
-	},
-
-	hideCursor: function () {
-		this.element.cursor.style.display = "none";
-		this.blinkCursor(false);
-	},
-	updateCursor: function (from, to) {
-		this.setCursor(to.x, to.y);
-		this.element.cursor.scrollIntoViewIfNeeded();
-		if(Range.equal(from, to)) {
-			this.blinkCursor();
-		} else {
-			this.hideCursor();
-		}
-	},
-	setCursor: function (x, y) {
-		var style = this.element.cursor.style, input = this.element.input;
-		style.top = y + "px";
-		style.left = (x-2) + "px";
-		style.display = "";
-		input.style.top = y + "px";
-		input.style.left = (x+1) + "px";
-	}
-});
+    blinkCursor: function (e) {
+        clearInterval(this.blinker);
+        if (e === false) return;
+        var t = true,
+            n = this.element.cursor.style;
+        n.visibility = "";
+        this.blinker = setInterval(function () {
+            n.visibility = (t = !t) ? "" : "hidden"
+        }, 626)
+    },
+    hideCursor: function () {
+        this.element.cursor.style.display = "none";
+        this.blinkCursor(false)
+    },
+    updateCursor: function (e, t) {
+        this.setCursor(t.x, t.y);
+        this.element.cursor.scrollIntoViewIfNeeded();
+        if (Range.equal(e, t)) {
+            this.blinkCursor()
+        } else {
+            this.hideCursor()
+        }
+    },
+    setCursor: function (e, t) {
+        var n = this.element.cursor.style,
+            r = this.element.input;
+        n.top = t + "px";
+        n.left = e - 2 + "px";
+        n.display = "";
+        r.style.top = t + "px";
+        r.style.left = e + 1 + "px"
+    }
+})

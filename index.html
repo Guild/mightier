@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Greetings | Mightier</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="mightier.css">
+  <title>Greetings | Mightier</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="mightier.css">
 </head>
 <body>
   <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="https://hull-js.s3.amazonaws.com/develop/hull.js"></script>
-  <script>    Hull.init({
-      appId : "5199809bf035ae4938000560",
-      orgUrl: "http://guild.hullapp.io",
-      debug : true // optional
-    });
-  </script>
-	<script type="text/javascript" src="app/lib.js"></script>
-	<script type="text/javascript" src="app/editor.js"></script>
-	<script type="text/javascript" src="app/layout.js"></script>
-	<script type="text/javascript" src="app/events.js"></script>
-	<script type="text/javascript" src="app/commands.js"></script>
-	<script type="text/javascript" src="app/cursor.js"></script>
-	<script type="text/javascript" src="app/input.js"></script>
-	<script type="text/javascript" src="app/selection.js"></script>
-	<script type="text/javascript" src="app/parser.js"></script>
-	<script type="text/javascript" src="app/undomanager.js"></script>
+  <script type="text/javascript" src="app/lib.js"></script>
+  <script type="text/javascript" src="app/editor.js"></script>
+  <script type="text/javascript" src="app/layout.js"></script>
+  <script type="text/javascript" src="app/events.js"></script>
+  <script type="text/javascript" src="app/commands.js"></script>
+  <script type="text/javascript" src="app/cursor.js"></script>
+  <script type="text/javascript" src="app/input.js"></script>
+  <script type="text/javascript" src="app/selection.js"></script>
+  <script type="text/javascript" src="app/parser.js"></script>
+  <script type="text/javascript" src="app/undomanager.js"></script>
 
-	<script type="text/javascript">
-		var text = ["# SHORTCUTS", "", "FocusMode: Cmd + D", "SmartTyping: Type \"<\", \"\"\", \"[\", \"{\" & \"(\"", "Save: Cmd + S", "Indent: Tab or Shift + Tab", "", "## Emphasis and Strong", "", "Emphasis: *example* = _example_ (or Cmd + I)", "Strong: **example** = __example__ (or Cmd + B)", "", "## Numbered lists: type \"1.\" + space", "", "1. Ordered list item", "2. Ordered list item", "3. Ordered list item (enter to create a new item)", "", "## Bulleted lists: type \"*\" + space", "", "* Bulleted list item", "* Bulleted list item", "* Bulleted list item", "", "## ToDo lists: type \"-\" or \"+\" + space", "", "- Task (Mark as done, click on \"-\")", "+ Task Done", "", "## Indentation", "", "	This is an example of a indented paragraph.", "", "## Blockquotes", "", "> This is an example of a quoted paragraph. It stays indented over multiple lines until you hit enter."]
-		var Document = new Editor(localStorage["content"] || text);
-		Document.goDocStart();
-		Document.focusInput();
-	</script>
-  <div data-hull-widget="identity@hull"></div>
-	<script type="text/javascript">
-  		var GoSquared = {};
-  		GoSquared.acct = "GSN-434581-P";
-  		(function(w){
-    			function gs(){
-      				w._gstc_lt = +new Date;
-      				var d = document, g = d.createElement("script");
-      				g.type = "text/javascript";
-      				g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-      				var s = d.getElementsByTagName("script")[0];
-      				s.parentNode.insertBefore(g, s);
-    			}
-    			w.addEventListener ?
-      				w.addEventListener("load", gs, false) :
-      				w.attachEvent("onload", gs);
-  		})(window);
-	</script>
-	<script type="text/javascript">
-  		var analytics=analytics||[];analytics.load=function(e){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src=("https:"===document.location.protocol?"https://":"http://")+"d2dq2ahtl5zl1z.cloudfront.net/analytics.js/v1/"+e+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);var r=function(e){return function(){analytics.push([e].concat(Array.prototype.slice.call(arguments,0)))}},i=["identify","track","trackLink","trackForm","trackClick","trackSubmit","pageview","ab","alias","ready","group"];for(var s=0;s<i.length;s++)analytics[i[s]]=r(i[s])};
-  		analytics.load("dthect0ayc");
-	</script>
+  <script type="text/javascript">
+    $('.content').prepend('<div>A thing by <a href="twitter.com/devinhalladay">Devin Halladay</a>.</div>');
+    var text = ["A thing by Devin Halladay (http://twitter.com/devinhalladay)", "", "This app uses localStorage to store your writings.", "", "# SHORTCUTS", "", "FocusMode: Cmd + D", "SmartTyping: Type \"<\"", "Save: Cmd + S", "Indent: Tab or Shift + Tab", "", "## Emphasis and Strong", "", "Emphasis: *example* = _example_ (or Cmd + I)", "Strong: **example** = __example__ (or Cmd + B)", "", "## Numbered lists: type \"1.\" + space", "", "1. Ordered list item", "2. Ordered list item", "3. Ordered list item (enter to create a new item)", "", "## Bulleted lists: type \"*\" + space", "", "* Bulleted list item", "* Bulleted list item", "* Bulleted list item", "", "## ToDo lists: type \"-\" or \"+\" + space", "", "- Task (Mark as done, click on \"-\")", "+ Task Done", "", "## Indentation", "", "  This is an example of a indented paragraph.", "", "## Blockquotes", "", "> This is an example of a quoted paragraph. It stays indented over multiple lines until you hit enter."]
+    var Document = new Editor(localStorage["content"] || text);
+    Document.goDocStart();
+    Document.focusInput();
+  </script>
+  <script type="text/javascript">
+      var GoSquared = {};
+      GoSquared.acct = "GSN-434581-P";
+      (function(w){
+          function gs(){
+              w._gstc_lt = +new Date;
+              var d = document, g = d.createElement("script");
+              g.type = "text/javascript";
+              g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
+              var s = d.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(g, s);
+          }
+          w.addEventListener ?
+              w.addEventListener("load", gs, false) :
+              w.attachEvent("onload", gs);
+      })(window);
+  </script>
 </body>
 </html>
